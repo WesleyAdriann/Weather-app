@@ -2,15 +2,16 @@ import React from 'react';
 
 const SearchBar = props => {
     return (
-        <form>
+        <form onSubmit={e => props.handleSearch(e)}>
             <div className="btn-group form-group w-100">
                 <input
                     className="form-control"
                     type="text"
-                    onChange={e => {props.handleChange(e)}}/>
-                <button type="button" className="btn btn-primary">Buscar</button>
-                
+                    name="Search"
+                    onChange={e => props.handleChange(e)}/>
+                <button type="submit" className="btn btn-primary">Buscar</button>
             </div>
+            
         </form>
     );
 }

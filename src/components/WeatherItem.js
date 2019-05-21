@@ -3,7 +3,7 @@
     const WeatherItem = props => {
         return (
             <div>
-                Weather
+                Temperatura : {props.temp} <br/>
             </div>
         );
     }
