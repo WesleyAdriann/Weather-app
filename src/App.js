@@ -12,6 +12,8 @@ class App extends Component  {
     this.state = {
       Search : '',
       Cities : [],
+      Prevision : [],
+      test : null
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -27,16 +29,21 @@ class App extends Component  {
 
   handleSearch(e) {
     e.preventDefault();
+    console.log(this.state.Cities);
+    if(this.state.Cities.length >= 3) {
+      this.state.Cities.splice(2, 1);
+    }
     if(this.state.Search !== '' ) {
-      axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.Search}&appid=${key}&units=metric`)
+      axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.Search},${this.state.test}&units=metric&appid=${key}`)
         .then(resp =>  {
-          // console.log("Resp" + resp);
-          console.log(this.state.Cities);
-          if(resp.status === 200) {
-            this.setState({
-              Cities : [...this.state.Cities , resp.data],
+          axios.get(`http://api.openweathermap.org/data/2.5/forecast?id=${resp.data.id}&units=metric&appid=${key}`)
+            .then(res => {
+              if(resp.status === 200) {
+                this.setState({
+                  Cities : [[resp.data, res.data] , ...this.state.Cities],
+                })
+              }
             })
-          }
         });
     }
   }
@@ -54,7 +61,11 @@ class App extends Component  {
         <div className="col">
           {this.state.Cities.map(city => {
             return (
-              <WeatherItem temp={city.main.temp}/>
+              <WeatherItem
+                key={city[0].id}
+                name={city[0].name}
+                temp={city[0].main.temp}
+                />
             )
           })}
         </div>

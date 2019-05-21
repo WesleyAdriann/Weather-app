@@ -3,6 +3,7 @@
     const WeatherItem = props => {
         return (
             <div>
+                Cidade: {props.name} <br/>
                 Temperatura : {props.temp} <br/>
             </div>
         );
