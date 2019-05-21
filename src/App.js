@@ -30,10 +30,11 @@ class App extends Component  {
     if(this.state.Search !== '' ) {
       axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.Search}&appid=${key}&units=metric`)
         .then(resp =>  {
-          console.log(resp);
+          // console.log("Resp" + resp);
+          console.log(this.state.Cities);
           if(resp.status === 200) {
             this.setState({
-              Cities : [this.state.Cities] + [resp.data]
+              Cities : [...this.state.Cities , resp.data],
             })
           }
         });
@@ -51,10 +52,9 @@ class App extends Component  {
       </div>
       <div className="row">
         <div className="col">
-          {Object.values(this.state.Cities).map((value, key) => {
-            console.log(value);
-            return(
-              <div/>
+          {this.state.Cities.map(city => {
+            return (
+              <WeatherItem temp={city.main.temp}/>
             )
           })}
         </div>
