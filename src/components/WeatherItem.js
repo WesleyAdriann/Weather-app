@@ -18,11 +18,11 @@ const WeatherItem = props => {
 
             </div>
             <div className="col">
-                <Sparklines data={["10","20",]} width={100}>
+                <Sparklines data={props.umidadePrev} width={100}>
                     <SparklinesLine color="blue" />
                     <SparklinesReferenceLine type="avg" />
                 </Sparklines>
-                Temperatura
+                Umidade
             </div>
             <div className="col">
                 <Sparklines data={[0,5, 10, 5, 20]} width={100}>

@@ -62,10 +62,10 @@ class App extends Component  {
       <div className="row">
         <div className="col">
           {this.state.Cities.map(city => {
-            let tempPrevArr,humidadePrevArr = []
+            let tempPrevArr = [] , umidadePrevArr = []
             city[1].list.map(value => {
               tempPrevArr = [...tempPrevArr, value.main.temp];
-              humidadePrevArr = [...humidadePrevArr, value.main.humidity];
+              umidadePrevArr = [...umidadePrevArr, value.main.humidity];
             })
             console.log(city[1])
             return (
@@ -74,6 +74,7 @@ class App extends Component  {
                 name={city[0].name}
                 temp={city[0].main.temp}
                 tempPrev={tempPrevArr}
+                umidadePrev={umidadePrevArr}
                 />
             )
           })}
