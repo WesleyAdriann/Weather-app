@@ -29,10 +29,8 @@ class App extends Component  {
 
   handleSearch(e) {
     e.preventDefault();
-    console.log(this.state.Cities);
-    if(this.state.Cities.length >= 3) {
-      this.state.Cities.splice(2, 1);
-    }
+    //console.log(this.state.Cities);
+    
     if(this.state.Search !== '' ) {
       axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.Search},${this.state.test}&units=metric&appid=${key}`)
         .then(resp =>  {
@@ -50,6 +48,10 @@ class App extends Component  {
   
 
   render() {
+    if(this.state.Cities.length >= 5) {
+      this.state.Cities.splice(4, 1);
+    }
+
     return (
       <div className="container mt-5 bg-white rounded" style={{height: '90vh'}}>
       <div className="row p-3">
@@ -60,11 +62,18 @@ class App extends Component  {
       <div className="row">
         <div className="col">
           {this.state.Cities.map(city => {
+            let tempPrevArr,humidadePrevArr = []
+            city[1].list.map(value => {
+              tempPrevArr = [...tempPrevArr, value.main.temp];
+              humidadePrevArr = [...humidadePrevArr, value.main.humidity];
+            })
+            console.log(city[1])
             return (
               <WeatherItem
-                key={city[0].id}
+                key={city.indexOf}
                 name={city[0].name}
                 temp={city[0].main.temp}
+                tempPrev={tempPrevArr}
                 />
             )
           })}
