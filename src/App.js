@@ -61,28 +61,31 @@ class App extends Component  {
       </div>
       <div className="row">
         <div className="col">
+
           {this.state.Cities.map(city => {
             let tempPrevArr = [] , umidadePrevArr = [], pressaoPrevArr = [];
             city[1].list.map(value => {
               tempPrevArr = [...tempPrevArr, value.main.temp];
               umidadePrevArr = [...umidadePrevArr, value.main.humidity];
               pressaoPrevArr = [...pressaoPrevArr, value.main.pressure];
-              
+              return ''
             })
-            console.log(city[0])
             return (
               <WeatherItem
                 key={city.indexOf}
                 name={city[0].name +", " +city[0].sys.country}
                 temp={parseInt(city[0].main.temp)}
+                humidity={parseInt(city[0].main.humidity)}
+                pressure={parseInt(city[0].main.pressure)}
                 tempPrev={tempPrevArr}
                 umidadePrev={umidadePrevArr}
                 pressaoPrev={pressaoPrevArr}
                 icon={`http://openweathermap.org/img/w/${city[0].weather[0].icon}.png`}
                 alt={city[0].weather[0].description}
                 />
-            )
+            ) 
           })}
+
         </div>
       </div>
       </div>

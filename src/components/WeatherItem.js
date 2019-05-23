@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Sparklines, SparklinesReferenceLine,SparklinesCurve   } from 'react-sparklines';
+import Graph from './Graph';
 
 const WeatherItem = props => {
     function add(acc, a) {return acc + a};
@@ -13,35 +13,13 @@ const WeatherItem = props => {
                 
                 <h6><img src={props.icon} alt={props.alt}/> {props.name}</h6>
                 <h6>Temperatura Atual : {props.temp} ºC</h6>
+                <h6>Umidade Atual : {props.humidity} %</h6>
+                <h6>Pressão Atual : {props.pressure} atm</h6>
 
             </div>
-            
-            <div className="col-3">
-                <h6>Temperatura</h6>
-                <Sparklines data={props.tempPrev} height={100} style={{borderRadius: '15px'}}>
-                    <SparklinesCurve  color="orange" />
-                    <SparklinesReferenceLine type="avg"/>
-                </Sparklines>
-                <h6>Media: {avgTemp}ºC</h6>
-                
-
-            </div>
-            <div className="col-3">
-                <h6>Umidade</h6>
-                <Sparklines data={props.umidadePrev} height={100} style={{borderRadius: '15px'}}>
-                    <SparklinesCurve  color="blue" />
-                    <SparklinesReferenceLine type="avg" />
-                </Sparklines>
-                <h6>Media: {avgUmi}%</h6>
-            </div>
-            <div className="col-3">
-                <h6>Pressão</h6>
-                <Sparklines data={props.pressaoPrev} height={100} style={{borderRadius: '15px'}}>
-                    <SparklinesCurve  color="green" />
-                    <SparklinesReferenceLine type="avg" />
-                </Sparklines>
-                <h6>Media : {avgPre} atm</h6>
-            </div>
+            <Graph data={props.tempPrev} color="orange" avg={avgTemp + "ºC"} label="Temperatura"/>
+            <Graph data={props.umidadePrev} color="blue" avg={avgUmi + "%"} label="Umidade"/>
+            <Graph data={props.pressaoPrev} color="green" avg={avgPre + "atm"} label="Pressão"/>
             
             
         </div>
