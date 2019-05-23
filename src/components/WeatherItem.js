@@ -8,7 +8,7 @@ const WeatherItem = props => {
     const avgUmi = parseInt(props.umidadePrev.reduce(add,0)/props.umidadePrev.length);
     const avgPre = parseInt(props.pressaoPrev.reduce(add,0)/props.pressaoPrev.length);
     return (
-        <div className="row pl-3 pr-3 text-center" style={{height: '20vh'}}>
+        <div className="row pl-3 pr-3 pt-3 text-center border-bottom" style={{height: '20vh'}}>
             <div className="col-3 text-left">
                 
                 <h6><img src={props.icon} alt={props.alt}/> {props.name}</h6>
