@@ -32,7 +32,7 @@ class App extends Component  {
     //console.log(this.state.Cities);
     
     if(this.state.Search !== '' ) {
-      axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.Search},${this.state.test}&units=metric&appid=${key}`)
+      axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.Search},BR&units=metric&appid=${key}`)
         .then(resp =>  {
           axios.get(`http://api.openweathermap.org/data/2.5/forecast?id=${resp.data.id}&units=metric&appid=${key}`)
             .then(res => {
@@ -79,6 +79,7 @@ class App extends Component  {
                 umidadePrev={umidadePrevArr}
                 pressaoPrev={pressaoPrevArr}
                 icon={`http://openweathermap.org/img/w/${city[0].weather[0].icon}.png`}
+                alt={city[0].weather[0].description}
                 />
             )
           })}
